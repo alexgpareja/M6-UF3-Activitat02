@@ -2,13 +2,12 @@ package com.iticbcn.mongoapi.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.iticbcn.mongoapi.DTO.CotxeDTO;
 import com.iticbcn.mongoapi.Mapper.CotxeMapper;
 import com.iticbcn.mongoapi.Model.Cotxe;
 import com.iticbcn.mongoapi.Repositories.CotxeRepository;
-
-import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -28,7 +27,7 @@ public class CotxeServiceImpl implements CotxeService {
     }
 
     @Override
-    public Mono<Cotxe> save(CotxeDTO cotxeDTO) {
+    public Mono<Cotxe> save(@RequestBody CotxeDTO cotxeDTO) {
         return repository.save(mapper.toEntity(cotxeDTO));
     }
 
