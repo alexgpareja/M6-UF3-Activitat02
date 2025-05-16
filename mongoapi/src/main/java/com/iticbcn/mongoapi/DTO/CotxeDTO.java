@@ -6,5 +6,5 @@ public record CotxeDTO(
         String model,
         int any,
         double preu,
-        String color
-) {}
+        String color) {
+}

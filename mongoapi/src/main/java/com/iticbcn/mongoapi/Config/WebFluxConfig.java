@@ -8,4 +8,3 @@ import org.springframework.web.reactive.config.WebFluxConfigurer;
 @EnableWebFlux
 public class WebFluxConfig implements WebFluxConfigurer {
 }
-

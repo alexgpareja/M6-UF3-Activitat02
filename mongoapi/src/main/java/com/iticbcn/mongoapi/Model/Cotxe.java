@@ -17,7 +17,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class Cotxe implements Serializable {
-    
+
     @Id
     private String id;
     private String marca;
