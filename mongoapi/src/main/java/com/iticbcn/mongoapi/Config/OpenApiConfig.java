@@ -1,8 +1,7 @@
-package com.iticbcn.webflux.apimongo.config;
+package com.iticbcn.mongoapi.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import org.springframework.web.reactive.config.WebFluxConfigurer;
 
 import io.swagger.v3.oas.models.OpenAPI;
