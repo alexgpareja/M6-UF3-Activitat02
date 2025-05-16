@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.iticbcn.mongoapi.DTO.CotxeDTO;
 import com.iticbcn.mongoapi.Model.Cotxe;
-import com.iticbcn.mongoapi.Service.CotxeService;
+import com.iticbcn.mongoapi.Services.CotxeService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import reactor.core.publisher.Flux;

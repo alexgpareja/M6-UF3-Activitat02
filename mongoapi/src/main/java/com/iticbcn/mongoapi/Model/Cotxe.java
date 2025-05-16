@@ -1,14 +1,15 @@
 package com.iticbcn.mongoapi.Model;
 
+import java.io.Serializable;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.io.Serializable;
 
 @Document(collection = "cotxes")
 @Builder
@@ -17,7 +18,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class Cotxe implements Serializable {
-    
     @Id
     private String id;
     private String marca;
