@@ -15,39 +15,47 @@ import reactor.core.publisher.Mono;
 @Service
 @RequiredArgsConstructor
 public class CotxeServiceImpl implements CotxeService {
-    @Autowired
-    private final CotxeRepository repository;
-    @Autowired
-    private final CotxeMapper mapper;
 
-    @Override
-    public Mono<Cotxe> save(CotxeDTO cotxeDTO) {
-        return repository.save(mapper.toEntity(cotxeDTO));
-    }
+  @Autowired
+  private final CotxeRepository repository;
 
-    @Override
-    public Mono<Cotxe> findById(String id) {
-        return repository.findById(id);
-    }
+  @Autowired
+  private final CotxeMapper mapper;
 
-    @Override
-    public Flux<Cotxe> findAll() {
-        return repository.findAll();
-    }
+  @Autowired
+  public CotxeServiceImpl(CotxeRepository repository, CotxeMapper mapper) {
+    this.repository = repository;
+    this.mapper = mapper;
+  }
 
-    @Override
-    public Mono<Cotxe> update(CotxeDTO cotxeDTO) {
-        return repository.findById(cotxeDTO.id())
-                .map(existing -> mapper.toEntity(cotxeDTO))
-                .flatMap(repository::save);
-    }
+  @Override
+  public Mono<Cotxe> save(CotxeDTO cotxeDTO) {
+    return repository.save(mapper.toEntity(cotxeDTO));
+  }
 
-    @Override
-    public Mono<Void> delete(String id) {
-        return repository.deleteById(id);
-    }
+  @Override
+  public Mono<Cotxe> findById(String id) {
+    return repository.findById(id);
+  }
 
-    public Flux<Cotxe> findByMarca(String marca) {
-        return repository.findByMarca(marca);
-    }
+  @Override
+  public Flux<Cotxe> findAll() {
+    return repository.findAll();
+  }
+
+  @Override
+  public Mono<Cotxe> update(CotxeDTO cotxeDTO) {
+    return repository.findById(cotxeDTO.id())
+        .map(existing -> mapper.toEntity(cotxeDTO))
+        .flatMap(repository::save);
+  }
+
+  @Override
+  public Mono<Void> delete(String id) {
+    return repository.deleteById(id);
+  }
+
+  public Flux<Cotxe> findByMarca(String marca) {
+    return repository.findByMarca(marca);
+  }
 }

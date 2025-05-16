@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.iticbcn.mongoapi.DTO.CotxeDTO;
 import com.iticbcn.mongoapi.Model.Cotxe;
-import com.iticbcn.mongoapi.Services.CotxeService;
+import com.iticbcn.mongoapi.Services.CotxeServiceImpl;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import reactor.core.publisher.Flux;
@@ -22,13 +22,13 @@ import reactor.core.publisher.Mono;
 public class CotxeController {
 
   @Autowired
-  private final CotxeService cotxeService;
+  private final CotxeServiceImpl cotxeService;
 
-  public CotxeController(CotxeService cotxeService) {
+  public CotxeController(CotxeServiceImpl cotxeService) {
     this.cotxeService = cotxeService;
   }
 
-  @PostMapping
+  @PostMapping("/save")
   public Mono<Cotxe> createCotxe(@RequestBody CotxeDTO cotxeDTO) {
     return cotxeService.save(cotxeDTO);
   }
@@ -38,17 +38,17 @@ public class CotxeController {
     return cotxeService.findById(id);
   }
 
-  @GetMapping
+  @GetMapping("/all")
   public Flux<Cotxe> getAllCotxes() {
     return cotxeService.findAll();
   }
 
-  @PutMapping
+  @PutMapping("/update")
   public Mono<Cotxe> updateCotxe(@RequestBody CotxeDTO cotxeDTO) {
     return cotxeService.update(cotxeDTO);
   }
 
-  @DeleteMapping("/{id}")
+  @DeleteMapping("/delete/{id}")
   public Mono<Void> deleteCotxe(@PathVariable String id) {
     return cotxeService.delete(id);
   }
