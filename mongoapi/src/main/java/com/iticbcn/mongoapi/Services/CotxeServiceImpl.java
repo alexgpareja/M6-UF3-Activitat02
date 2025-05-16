@@ -17,8 +17,6 @@ import reactor.core.publisher.Mono;
 public class CotxeServiceImpl implements CotxeService {
     @Autowired
     private final CotxeRepository repository;
-    
-    @Autowired
     private final CotxeMapper mapper;
 
     @Override
