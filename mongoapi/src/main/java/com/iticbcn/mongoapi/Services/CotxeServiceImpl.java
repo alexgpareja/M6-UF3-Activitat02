@@ -1,5 +1,6 @@
 package com.iticbcn.mongoapi.Services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.iticbcn.mongoapi.DTO.CotxeDTO;
@@ -14,7 +15,9 @@ import reactor.core.publisher.Mono;
 @Service
 @RequiredArgsConstructor
 public class CotxeServiceImpl implements CotxeService {
+    @Autowired
     private final CotxeRepository repository;
+    @Autowired
     private final CotxeMapper mapper;
 
     @Override
