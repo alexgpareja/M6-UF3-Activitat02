@@ -10,4 +10,5 @@ import reactor.core.publisher.Flux;
 @Repository
 public interface CotxeRepository extends ReactiveMongoRepository<Cotxe, String> {
     Flux<Cotxe> findByMarca(String marca);
+
 }

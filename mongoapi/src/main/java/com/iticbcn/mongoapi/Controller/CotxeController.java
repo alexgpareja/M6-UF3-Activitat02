@@ -47,6 +47,13 @@ public class CotxeController {
   public Mono<Cotxe> updateCotxe(@RequestBody CotxeDTO cotxeDTO) { // Anotación Spring correcta
     return cotxeService.update(cotxeDTO);
   }
+  
+  @GetMapping("/search/startswith/{letter}")
+  public Flux<Cotxe> getCotxesWithModelStartingWith(@PathVariable String letter) {
+    return cotxeService.findByModelStartingWithLetter(letter);
+  }
+
+
 
   @DeleteMapping("/delete/{id}")
   public Mono<Void> deleteCotxe(@PathVariable String id) {
