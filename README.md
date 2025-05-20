@@ -1,4 +1,10 @@
-# M6-UF3-Activitat02
+# Activitat A02 - UF3 M06: API Reactiva amb Spring Boot i MongoDB
+
+## Objectiu de l'activitat
+
+En aquesta activitat, hem creat una **API Reactiva** que interactua amb una base de dades MongoDB mitjançant **Spring Boot** i **Spring WebFlux**. Hem utilitzat **DTOs** per a la comunicació entre el client i el servidor i hem implementat la seva conversió mitjançant **MapStruct**. 
+
+
 ## Millores i preguntes de reflexió
 
 ### 1. Afegiu un endpoint que cerqui per un camp de tipus String on feu servir regex. Afegiu el que calgui al servei, repositori, etc.
@@ -83,3 +89,36 @@ Aquest `record` genera:
 - Mètodes `equals()`, `hashCode()` i `toString()`
 
 És ideal per a DTOs i estructures de dades immutables, especialment útils en programació funcional i reactiva.
+
+## Proves amb Swagger
+
+### 1. Crear un cotxe
+
+<img width="1454" alt="image" src="https://github.com/user-attachments/assets/47192ad4-6b5a-4149-94af-0f3b370a8363" />
+
+URL: /api/cotxes/save
+
+Mètode HTTP: POST
+
+Descripció: Aquest endpoint rep un DTO de Cotxe i el guarda a la base de dades.
+
+Paràmetres: El cos de la petició ha de contenir un objecte CotxeDTO amb la informació del cotxe a crear.
+
+Resposta: Retorna un Mono amb el cotxe creat.
+
+### 2. Obtenir un cotxe per ID
+
+<img width="1463" alt="image" src="https://github.com/user-attachments/assets/ff43ce88-c9a6-40a3-b9c7-e6db967b6c61" />
+
+URL: /api/cotxes/{id}
+
+Mètode HTTP: GET
+
+Descripció: Obté un Cotxe per ID des de la base de dades.
+
+Paràmetres: El paràmetre {id} és l'ID del cotxe que es vol obtenir.
+
+Resposta: Retorna un Mono amb el Cotxe que coincideix amb l'ID.
+
+### 3. Endpoint: Llistar tots els cotxes
+
