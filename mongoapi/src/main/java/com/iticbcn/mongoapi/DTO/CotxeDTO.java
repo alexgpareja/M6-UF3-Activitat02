@@ -4,7 +4,7 @@ public record CotxeDTO(
         String id,
         String marca,
         String model,
-        int any,
+        Integer any,
         double preu,
         String color) {
 }

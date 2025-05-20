@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody; // Importación corregida
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +14,6 @@ import com.iticbcn.mongoapi.DTO.CotxeDTO;
 import com.iticbcn.mongoapi.Model.Cotxe;
 import com.iticbcn.mongoapi.Services.CotxeServiceImpl;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -29,7 +29,7 @@ public class CotxeController {
   }
 
   @PostMapping("/save")
-  public Mono<Cotxe> createCotxe(@RequestBody CotxeDTO cotxeDTO) {
+  public Mono<Cotxe> createCotxe(@RequestBody CotxeDTO cotxeDTO) { // Anotación Spring correcta
     return cotxeService.save(cotxeDTO);
   }
 
@@ -44,7 +44,7 @@ public class CotxeController {
   }
 
   @PutMapping("/update")
-  public Mono<Cotxe> updateCotxe(@RequestBody CotxeDTO cotxeDTO) {
+  public Mono<Cotxe> updateCotxe(@RequestBody CotxeDTO cotxeDTO) { // Anotación Spring correcta
     return cotxeService.update(cotxeDTO);
   }
 

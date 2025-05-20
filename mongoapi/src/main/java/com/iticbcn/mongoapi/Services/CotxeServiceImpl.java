@@ -14,13 +14,10 @@ import reactor.core.publisher.Mono;
 @Service
 public class CotxeServiceImpl implements CotxeService {
 
-    @Autowired
     private final CotxeRepository repository;
 
-    @Autowired
     private final CotxeMapper mapper;
 
-    @Autowired
     public CotxeServiceImpl(CotxeRepository repository, CotxeMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
