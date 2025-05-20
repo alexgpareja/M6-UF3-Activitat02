@@ -1,13 +1,85 @@
 # M6-UF3-Activitat02
-
 ## Millores i preguntes de reflexió
 
-**1. Afegiu un endpoint que cerqui per un camp de tipus String on feu servir regex. Afegiu el que calgui al servei, repositori, etc.**
+### 1. Afegiu un endpoint que cerqui per un camp de tipus String on feu servir regex. Afegiu el que calgui al servei, repositori, etc.
 
-**2. Què caracteritza una API reactiva com aquesta i què la fa diferent d’una API síncrona amb MVC com les treballades anteriorment?**
+Per implementar aquest endpoint que cerca per un camp `String` mitjançant una expressió regular, cal fer el següent:
 
-**3. Què signifiquen Mono i Flux? Per a què penseu que serveixen i per què són útils en aquest tipus de programació?**
+- **Repositori** (usant Spring Data Reactive amb MongoDB, per exemple):
 
-**4. Què és `record`? Un `record` utilitza getters i setters? Justifiqueu la resposta.**
+```java
+@Query("{ 'nom' : { $regex: ?0, $options: 'i' } }")
+Flux<Entitat> findByNomRegex(String regex);
+```
 
-## Proves
+- **Servei**:
+
+```java
+public Flux<Entitat> cercarPerNom(String regex) {
+    return repositori.findByNomRegex(regex);
+}
+```
+
+- **Controlador**:
+
+```java
+@GetMapping("/cerca")
+public Flux<Entitat> cercaPerNom(@RequestParam String nom) {
+    return servei.cercarPerNom(nom);
+}
+```
+
+Aquesta funcionalitat permet cercar entitats que continguin un cert patró dins del camp `nom`, amb cerca insensible a majúscules/minúscules (`$options: 'i'`).
+
+---
+
+### 2. Què caracteritza una API reactiva com aquesta i què la fa diferent d’una API síncrona amb MVC com les treballades anteriorment?
+
+Una API **reactiva** es caracteritza per:
+
+- Ser **no bloquejant**, cosa que permet atendre moltes peticions amb pocs recursos.
+- Treballar de forma **asíncrona**, gestionant fluxos de dades amb **`Mono` i `Flux`**.
+- Estar pensada per escalar millor, especialment en entorns amb alta concurrència.
+- Fer servir el model de programació **reactiva** basat en la propagació d'esdeveniments.
+
+En canvi, una API **síncrona amb MVC**:
+
+- És **bloquejant**: cada petició consumeix un fil fins que es resol.
+- Té una estructura més tradicional, fàcil d'entendre, però menys eficient per a aplicacions que gestionen moltes connexions simultànies.
+- No està pensada per treballar amb fluxos de dades ni operacions reactives.
+
+---
+
+### 3. Què signifiquen Mono i Flux? Per a què penseu que serveixen i per què són útils en aquest tipus de programació?
+
+- **`Mono<T>`**: representa una emissió de **0 o 1 element**. Es fa servir quan esperem una sola resposta, com recuperar una entitat per ID.
+- **`Flux<T>`**: representa una emissió de **0 o més elements**. És útil per a col·leccions, fluxos de dades o respostes múltiples.
+
+Serveixen per gestionar dades de manera **reactiva** i **asíncrona**. Són útils perquè:
+
+- Permeten composició i manipulació declarativa del flux de dades.
+- Afavoreixen un model no bloquejant que millora la rendibilitat.
+- Són compatibles amb la gestió d’errors i operacions encadenades de forma clara i eficaç.
+
+---
+
+### 4. Què és record? Un record utilitza getters i setters? Justifiqueu la resposta
+
+Un **`record`** en Java és una classe especial introduïda a partir de Java 14 (estable en Java 16) que serveix per declarar **dades immutables** de forma concisa.
+
+- **No utilitza setters**, ja que els camps són finals (immutables).
+- **Sí genera getters**, però aquests no tenen el prefix `get`. Es generen automàticament amb el mateix nom que el camp.
+
+Exemple:
+
+```java
+public record Alumne(String nom, int edat) {}
+```
+
+Aquest `record` genera:
+
+- Un constructor
+- Getters: `nom()` i `edat()`
+- Mètodes `equals()`, `hashCode()` i `toString()`
+
+És ideal per a DTOs i estructures de dades immutables, especialment útils en programació funcional i reactiva.
