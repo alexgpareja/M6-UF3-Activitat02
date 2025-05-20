@@ -1,13 +1,12 @@
 package com.iticbcn.mongoapi.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody; // Importación corregida
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +14,6 @@ import com.iticbcn.mongoapi.DTO.CotxeDTO;
 import com.iticbcn.mongoapi.Model.Cotxe;
 import com.iticbcn.mongoapi.Services.CotxeServiceImpl;
 
-import jakarta.validation.Valid;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -31,13 +29,8 @@ public class CotxeController {
   }
 
   @PostMapping("/save")
-  public Mono<ResponseEntity<Cotxe>> createCotxe(@RequestBody CotxeDTO cotxeDTO) {
-    return cotxeService.save(cotxeDTO)
-        .map(ResponseEntity::ok)
-        .onErrorResume(e -> {
-          System.err.println("Error al guardar: " + e.getMessage());
-          return Mono.just(ResponseEntity.badRequest().build());
-        });
+  public Mono<Cotxe> createCotxe(@RequestBody CotxeDTO cotxeDTO) { // Anotación Spring correcta
+    return cotxeService.save(cotxeDTO);
   }
 
   @GetMapping("/{id}")
@@ -51,7 +44,7 @@ public class CotxeController {
   }
 
   @PutMapping("/update")
-  public Mono<Cotxe> updateCotxe(@RequestBody CotxeDTO cotxeDTO) {
+  public Mono<Cotxe> updateCotxe(@RequestBody CotxeDTO cotxeDTO) { // Anotación Spring correcta
     return cotxeService.update(cotxeDTO);
   }
 
