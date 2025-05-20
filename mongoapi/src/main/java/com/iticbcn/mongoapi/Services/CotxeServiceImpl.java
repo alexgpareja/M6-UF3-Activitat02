@@ -23,34 +23,37 @@ public class CotxeServiceImpl implements CotxeService {
         this.mapper = mapper;
     }
 
-    @Override
-    public Mono<Cotxe> save(@RequestBody CotxeDTO cotxeDTO) {
-        return repository.save(mapper.toEntity(cotxeDTO));
-    }
+  @Override
+  public Mono<Cotxe> save(@RequestBody CotxeDTO cotxeDTO) {
+    System.out.println("CotxeDTO recibido: " + cotxeDTO);
+    Cotxe cotxe = mapper.toEntity(cotxeDTO);
+    System.out.println("Cotxe convertido: " + cotxe);
+    return repository.save(cotxe);
+  }
 
-    @Override
-    public Mono<Cotxe> findById(String id) {
-        return repository.findById(id);
-    }
+  @Override
+  public Mono<Cotxe> findById(String id) {
+    return repository.findById(id);
+  }
 
-    @Override
-    public Flux<Cotxe> findAll() {
-        return repository.findAll();
-    }
+  @Override
+  public Flux<Cotxe> findAll() {
+    return repository.findAll();
+  }
 
-    @Override
-    public Mono<Cotxe> update(CotxeDTO cotxeDTO) {
-        return repository.findById(cotxeDTO.id())
-                .map(existing -> mapper.toEntity(cotxeDTO))
-                .flatMap(repository::save);
-    }
+  @Override
+  public Mono<Cotxe> update(CotxeDTO cotxeDTO) {
+    return repository.findById(cotxeDTO.id())
+        .map(existing -> mapper.toEntity(cotxeDTO))
+        .flatMap(repository::save);
+  }
 
-    @Override
-    public Mono<Void> delete(String id) {
-        return repository.deleteById(id);
-    }
+  @Override
+  public Mono<Void> delete(String id) {
+    return repository.deleteById(id);
+  }
 
-    public Flux<Cotxe> findByMarca(String marca) {
-        return repository.findByMarca(marca);
-    }
+  public Flux<Cotxe> findByMarca(String marca) {
+    return repository.findByMarca(marca);
+  }
 }
