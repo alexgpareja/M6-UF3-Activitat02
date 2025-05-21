@@ -120,5 +120,57 @@ Paràmetres: El paràmetre {id} és l'ID del cotxe que es vol obtenir.
 
 Resposta: Retorna un Mono amb el Cotxe que coincideix amb l'ID.
 
-### 3. Endpoint: Llistar tots els cotxes
+### 3. Llistar tots els cotxes
+
+<img width="1455" alt="image" src="https://github.com/user-attachments/assets/a23af397-fdd9-49a8-ad0f-e4621f48b945" />
+
+URL: /api/cotxes/all
+
+Mètode HTTP: GET
+
+Descripció: Llista tots els cotxes disponibles a la base de dades.
+
+Resposta: Retorna un Flux amb tots els Cotxes.
+
+### 4. Actualitzar un cotxe existent
+
+<img width="1461" alt="image" src="https://github.com/user-attachments/assets/e3f8b1a7-a66f-4b54-ab36-36ac91ff027d" />
+
+URL: /api/cotxes/update
+
+Mètode HTTP: PUT
+
+Descripció: Actualitza un Cotxe existent basant-se en el DTO enviat.
+
+Paràmetres: El cos de la petició ha de contenir un objecte CotxeDTO amb la nova informació del cotxe.
+
+Resposta: Retorna un Mono amb el cotxe actualitzat.
+
+### 5. Cercar cotxes per model que comencin amb una lletra
+
+<img width="1497" alt="image" src="https://github.com/user-attachments/assets/9df1f3a1-28be-4483-bc5b-01173a2951f7" />
+
+URL: /api/cotxes/search/startswith/{letter}
+
+Mètode HTTP: GET
+
+Descripció: Aquest endpoint cerca tots els cotxes amb el model que comencen amb una lletra específica.
+
+Paràmetres: El paràmetre {letter} és la lletra amb què comença el model del cotxe.
+
+Resposta: Retorna un Flux amb els Cotxes que coincideixen amb el criteri de cerca.
+
+### 6. Eliminar un cotxe per ID
+
+<img width="1472" alt="image" src="https://github.com/user-attachments/assets/1fcf09d4-c8d0-4a73-8ba8-c3e32e780f20" />
+
+URL: /api/cotxes/delete/{id}
+
+Mètode HTTP: DELETE
+
+Descripció: Elimina un Cotxe per ID des de la base de dades.
+
+Paràmetres: El paràmetre {id} és l'ID del cotxe a eliminar.
+
+Resposta: Retorna un Mono buit indicant que l'operació ha acabat.
 
